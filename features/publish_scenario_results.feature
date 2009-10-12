@@ -5,7 +5,7 @@ Feature: Publish scenario results
   
   Background:
     Given a standard Cucumber project directory structure
-    And a file named "features/foo.feature" containing:
+    And a file named "features/foo.feature" with:
       """
       Scenario: Solid
         Given I am a rock
@@ -14,7 +14,7 @@ Feature: Publish scenario results
         Given I am thin ice
       
       """
-    And a file named ".belly" containing
+    And a file named ".belly" with:
       """
       hub: localhost:12345
       
@@ -22,7 +22,7 @@ Feature: Publish scenario results
     And there is a belly-hub running on localhost:12345
 
   Scenario: run a test
-    And a file named "step_definitions/foo_steps.rb" containing:
+    And a file named "step_definitions/foo_steps.rb" with:
       """
       Given /I am a rock/ do
       end
@@ -32,7 +32,8 @@ Feature: Publish scenario results
       end
       """
     When I run cucumber -f Belly::Formatter features
-    Then the belly-hub should have received the following scenarios:
+    Then STDERR should be empty
+    And the belly-hub should have received the following scenarios:
       | name  | status  |
       | Solid | Success |
       | Shaky | Failed  |
