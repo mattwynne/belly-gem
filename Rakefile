@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "belly-mouth"
+    gem.name = "belly"
     gem.summary = %Q{Client app for the belly web service}
     gem.description = %Q{Client app for the belly web service}
     gem.email = "matt@mattwynne.net"
@@ -35,11 +35,11 @@ task :spec => :check_dependencies
 
 begin
   require 'cucumber/rake/task'
-  Cucumber::Rake::Task.new(:features)
+  Cucumber::Rake::Task.new(:cucumber)
 
-  task :features => :check_dependencies
+  task :cucumber => :check_dependencies
 rescue LoadError
-  task :features do
+  task :cucumber do
     abort "Cucumber is not available. In order to run features, you must: sudo gem install cucumber"
   end
 end
