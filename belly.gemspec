@@ -23,7 +23,10 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "belly.gemspec",
      "features/support/env.rb",
+     "lib/belly.rb",
+     "lib/belly/client.rb",
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/mattwynne/belly-mouth}
