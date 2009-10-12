@@ -1,6 +1,6 @@
 = belly-gem
 
-Client app for the awesome new belly web service. Coming soon.
+Client app for the incredible new belly web service, coming soon.
 
 == Copyright
 

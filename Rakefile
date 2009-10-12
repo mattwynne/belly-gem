@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "belly"
-    gem.summary = %Q{Client app for the belly web service}
-    gem.description = %Q{Client app for the belly web service}
+    gem.summary = %Q{Client app for the incredible new belly web service, coming soon.}
+    gem.description = %Q{Client app for the incredible new belly web service, coming soon.}
     gem.email = "matt@mattwynne.net"
     gem.homepage = "http://github.com/mattwynne/belly-mouth"
     gem.authors = ["Matt Wynne"]
