@@ -22,18 +22,19 @@ Feature: Publish scenario results
     And there is a belly-hub running on localhost:12345
 
   Scenario: run a test
-    And a file named "step_definitions/foo_steps.rb" with:
+    And a file named "features/step_definitions/foo_steps.rb" with:
       """
-      Given /I am a rock/ do
+      Given /^I am a rock$/ do
+      end
+
+      Given /^I am thin ice$/ do
+        raise("yikes")
       end
       
-      Given /I am thin ice/ do
-        raise "crack"
-      end
       """
     When I run cucumber -f Belly::Formatter features
     Then STDERR should be empty
-    And the belly-hub should have received the following scenarios:
-      | name  | status  |
-      | Solid | Success |
-      | Shaky | Failed  |
+    And the belly-hub should have received the following requests:
+      | type | path       | data                                  |
+      | POST | /scenarios | { "name":"Solid", "status":"passed" } |
+      | POST | /scenarios | { "name":"Shaky", "status":"failed" } |
