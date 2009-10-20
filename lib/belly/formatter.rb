@@ -1,4 +1,4 @@
-require 'belly/hub_client'
+require File.dirname(__FILE__) + '/hub_client'
 
 module Belly
   class Formatter
