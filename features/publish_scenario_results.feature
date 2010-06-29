@@ -7,11 +7,12 @@ Feature: Publish scenario results
     Given a standard Cucumber project directory structure
     And a file named "features/foo.feature" with:
       """
-      Scenario: Solid
-        Given I am a rock
+      Feature:
+        Scenario: Solid
+          Given I am a rock
       
-      Scenario: Shaky
-        Given I am thin ice
+        Scenario: Shaky
+          Given I am thin ice
       
       """
     And a file named ".belly" with:
