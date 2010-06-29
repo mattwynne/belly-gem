@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../lib')
-require 'belly'
+require 'aruba'
 
 require 'spec/expectations'
 
@@ -9,4 +9,4 @@ module BellyWorld
   end
 end
 
-World BellyWorld
+World(BellyWorld)

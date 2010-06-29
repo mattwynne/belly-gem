@@ -7,7 +7,7 @@ Feature: Publish scenario results
     Given a standard Cucumber project directory structure
     And a file named "features/foo.feature" with:
       """
-      Feature:
+      Feature: Test
         Scenario: Solid
           Given I am a rock
       
@@ -25,6 +25,7 @@ Feature: Publish scenario results
   Scenario: run a test
     And a file named "features/step_definitions/foo_steps.rb" with:
       """
+      require 'belly'
       Given /^I am a rock$/ do
       end
 
@@ -33,9 +34,9 @@ Feature: Publish scenario results
       end
       
       """
-    When I run cucumber -f Belly::Formatter features
-    Then STDERR should be empty
+    When I run "cucumber -r features -v"
+    Then I should see exactly ""
     And the belly-hub should have received the following requests:
-      | type | path       | data                                  |
-      | POST | /scenarios | { "name":"Solid", "status":"passed" } |
-      | POST | /scenarios | { "name":"Shaky", "status":"failed" } |
+      | type | path       | data                                                                   |
+      | POST | /scenarios | { "id": { "feature": "Test", "scenario": "Solid"}, "status":"passed" } |
+      | POST | /scenarios | { "id": { "feature": "Test", "scenario": "Shaky"}, "status":"failed" } |

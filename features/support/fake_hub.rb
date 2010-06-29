@@ -26,7 +26,6 @@ module Belly
         Requests.add({ 'type' => 'POST', 'path' => path, 'data' => params})
         ''
       end
-      
     end
     
     def initialize(port)

@@ -2,9 +2,9 @@ require 'net/http'
 require 'uri'
 
 module Belly
-  class HubClient
-    def initialize(host, port)
-      @url = "http://#{host}:#{port}"
+  class Client
+    def initialize(config)
+      @url = config.url
     end
     
     def add_scenario(data)
