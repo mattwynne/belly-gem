@@ -7,8 +7,6 @@ Feature: Publish scenario results
     Given a standard Cucumber project directory structure
     And a file named "features/step_definitions/foo_steps.rb" with:
       """
-      require 'belly'
-      
       Given /^I am a rock$/ do
       end
 
