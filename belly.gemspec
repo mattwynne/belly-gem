@@ -30,6 +30,8 @@ Gem::Specification.new do |s|
      "features/support/env.rb",
      "features/support/fake_hub.rb",
      "lib/belly.rb",
+     "lib/belly/client.rb",
+     "lib/belly/client/config.rb",
      "lib/belly/cucumber/hooks.rb",
      "spec/spec_helper.rb"
   ]

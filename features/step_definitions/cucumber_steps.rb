@@ -5,3 +5,8 @@ Given /^a standard Cucumber project directory structure$/ do
     FileUtils.mkdir 'features/step_definitions'
   end
 end
+
+When /^I run cucumber (.*)$/ do |cucumber_opts|
+  cmd = "#{Cucumber::RUBY_BINARY} -I#{belly_lib_path} #{Cucumber::BINARY} --no-color #{cucumber_opts}"
+  run(cmd, false)
+end

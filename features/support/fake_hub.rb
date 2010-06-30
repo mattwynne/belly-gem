@@ -14,16 +14,24 @@ module Belly
           def add(data)
             all << data
           end
+          
+          def clear!
+            @requests = []
+          end
         end
       end
       
       get '/requests' do
+        Requests.clear! if params['delete']
         Requests.all.to_json
       end
       
       post '*' do
-        path = params.delete('splat').join
-        Requests.add({ 'type' => 'POST', 'path' => path, 'data' => params})
+        Requests.add({ 
+          'type' => request.env['REQUEST_METHOD'], 
+          'path' => '/scenarios', 
+          'data' => request.body.read }
+        )
         ''
       end
     end
@@ -38,5 +46,13 @@ module Belly
     def requests
       JSON.parse(open("http://localhost:#{@port}/requests").read)
     end
+    
+    def clear_requests!
+      open("http://localhost:#{@port}/requests?delete=yeah")
+    end
   end
+end
+
+After do
+  @hub.clear_requests!
 end

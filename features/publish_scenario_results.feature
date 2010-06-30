@@ -5,14 +5,16 @@ Feature: Publish scenario results
   
   Background:
     Given a standard Cucumber project directory structure
-    And a file named "features/foo.feature" with:
+    And a file named "features/step_definitions/foo_steps.rb" with:
       """
-      Feature: Test
-        Scenario: Solid
-          Given I am a rock
+      require 'belly'
       
-        Scenario: Shaky
-          Given I am thin ice
+      Given /^I am a rock$/ do
+      end
+
+      Given /^I am thin ice$/ do
+        raise("yikes")
+      end
       
       """
     And a file named ".belly" with:
@@ -22,21 +24,32 @@ Feature: Publish scenario results
       """
     And there is a belly-hub running on localhost:12345
 
-  Scenario: run a test
-    And a file named "features/step_definitions/foo_steps.rb" with:
+  Scenario: Run a test with a scenario that passes
+    Given a file named "features/foo.feature" with:
       """
-      require 'belly'
-      Given /^I am a rock$/ do
-      end
-
-      Given /^I am thin ice$/ do
-        raise("yikes")
-      end
-      
+      Feature: Test
+        Scenario: Solid
+          Given I am a rock
+    
       """
-    When I run "cucumber -r features -v"
-    Then I should see exactly ""
+    When I run cucumber -r belly -r features -v
     And the belly-hub should have received the following requests:
-      | type | path       | data                                                                   |
-      | POST | /scenarios | { "id": { "feature": "Test", "scenario": "Solid"}, "status":"passed" } |
-      | POST | /scenarios | { "id": { "feature": "Test", "scenario": "Shaky"}, "status":"failed" } |
+      | type | path       | data                                                           |
+      | POST | /scenarios | {"status":"passed","id":{"scenario":"Solid","feature":"Test"}} |
+
+  Scenario: Run a test with a scenario that fails
+  And a file named "features/foo.feature" with:
+    """
+    Feature: Test
+      Scenario: Solid
+        Given I am a rock
+    
+      Scenario: Shaky
+        Given I am thin ice
+    
+    """
+    When I run cucumber -r belly -r features -v
+    And the belly-hub should have received the following requests:
+      | type | path       | data                                                           |
+      | POST | /scenarios | {"status":"passed","id":{"scenario":"Solid","feature":"Test"}} |
+      | POST | /scenarios | {"status":"failed","id":{"scenario":"Shaky","feature":"Test"}} |

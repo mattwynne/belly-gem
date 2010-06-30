@@ -1,7 +1,5 @@
 $:.push(File.expand_path(File.dirname(__FILE__)))
 
-p "loaded belly"
-
 begin
  Cucumber
 rescue NameError
@@ -23,7 +21,7 @@ module Belly
       feature_name = scenario.feature.name.split("\n").first # TODO: only needed for older cucumbers
       id = { :feature => feature_name, :scenario => scenario.name }
       
-      data = { :id => id, :status => scenario.status }.to_json 
+      data = { :id => id, :status => scenario.status }.to_json
       Belly.log("publishing #{data}")
       hub.add_scenario(data)
     end

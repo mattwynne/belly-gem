@@ -1,5 +1,7 @@
 module Belly
   class Config
+    attr_reader :host, :port
+    
     def initialize
       @host, @port = config_file['hub'].split(':')
     end
