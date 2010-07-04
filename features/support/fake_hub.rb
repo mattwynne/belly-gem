@@ -4,6 +4,13 @@ require 'open-uri'
 
 module Belly
   class FakeHub
+    class << self
+      def run(port)
+        return @instance if @instance
+        @instance = new(port)
+      end
+    end
+    
     class App < Sinatra::Base
       module Requests
         class << self
