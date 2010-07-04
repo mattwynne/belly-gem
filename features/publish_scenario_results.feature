@@ -5,6 +5,12 @@ Feature: Publish scenario results
   
   Background:
     Given a standard Cucumber project directory structure
+    And a file named "features/support/belly.rb" with:
+      """
+      require 'belly' rescue puts("Could not load belly - do you need to install the gem?")
+      
+      """
+      
     And a file named "features/step_definitions/foo_steps.rb" with:
       """
       Given /^I am a rock$/ do
