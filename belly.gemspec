@@ -9,12 +9,13 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matt Wynne"]
-  s.date = %q{2010-06-30}
+  s.date = %q{2010-07-04}
   s.description = %q{Client app for the incredible new belly web service, coming soon.}
   s.email = %q{matt@mattwynne.net}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.rdoc"
+     "README.rdoc",
+     "TODO"
   ]
   s.files = [
     ".document",
@@ -22,6 +23,7 @@ Gem::Specification.new do |s|
      "LICENSE",
      "README.rdoc",
      "Rakefile",
+     "TODO",
      "VERSION",
      "belly.gemspec",
      "features/publish_scenario_results.feature",
