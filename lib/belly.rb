@@ -13,11 +13,19 @@ module Belly
   
     def publish(scenario)
       feature_name = scenario.feature.name.split("\n").first # TODO: only needed for older cucumbers
-      id = { :feature => feature_name, :scenario => scenario.name }
+      data = { 
+        :id => { :feature => feature_name, :scenario => scenario.name }, 
+        :status => scenario.status, 
+        :project => config.project 
+      }.to_json
       
-      data = { :id => id, :status => scenario.status, :project => config.project }.to_json
       Belly.log("publishing #{data}")
-      hub.post_test_result(data)
+
+      # Break out a thread so we don't slow down the tests
+      thread = Thread.new { hub.post_test_result(data) }
+      
+      # Make sure the thread gets a chance to finish before the process exits
+      at_exit { thread.join }
     end
   
     def config

@@ -28,14 +28,21 @@ Gem::Specification.new do |s|
      "TODO",
      "VERSION",
      "belly.gemspec",
+     "bin/belly",
      "features/publish_scenario_results.feature",
      "features/step_definitions/belly_steps.rb",
      "features/step_definitions/cucumber_steps.rb",
      "features/support/env.rb",
      "features/support/fake_hub.rb",
      "lib/belly.rb",
+     "lib/belly/cli.rb",
+     "lib/belly/cli/init.rb",
      "lib/belly/client.rb",
      "lib/belly/client/config.rb",
+     "lib/belly/for/cucumber.rb",
+     "lib/belly/project_initializer.rb",
+     "lib/belly/user_credentials.rb",
+     "spec/belly/project_initializer_spec.rb",
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/mattwynne/belly-mouth}
