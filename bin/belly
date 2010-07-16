@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+require "rubygems"
+require "trollop"
+
+$:.unshift(File.dirname(__FILE__) + '/../lib')
+require 'belly'
+require 'belly/cli'
+
+Trollop::options do
+  banner <<-EOS
+=== Commands
+
+  init            Create a new project for the current folder
+  help <command>  Get some help on a particular command
+
+EOS
+  stop_on Belly::Cli::COMMANDS
+end
+
+command = ARGV.shift
+
+Trollop.die("You need to tell me what to do") unless command
+
+unless Belly::Cli::COMMANDS.include?(command)
+  Trollop.die("Don't know that command, sorry")
+end
+
+require "belly/cli/#{command}"

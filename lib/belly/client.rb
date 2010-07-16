@@ -7,8 +7,12 @@ module Belly
       @config = config
     end
     
-    def add_scenario(data)
-      request = Net::HTTP::Post.new(@config.url + '/scenarios', {'Content-Type' =>'application/json'})
+    def get(uri)
+      
+    end
+    
+    def post_test_result(data)
+      request = Net::HTTP::Post.new(@config.url + '/test_results', {'Content-Type' =>'application/json'})
       request.body = data
       response = Net::HTTP.new(@config.host, @config.port).start {|http| http.request(request) }
       unless response.code == "200"

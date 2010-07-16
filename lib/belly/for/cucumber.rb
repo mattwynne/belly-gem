@@ -1,3 +1,5 @@
+require 'belly'
+
 Before do |scenario|
   Belly.log %{about to run scenario "#{scenario.name}"}
 end
