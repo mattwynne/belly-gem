@@ -1,4 +1,5 @@
+default config for host / port pointing to production so gem has it hard-coded
+better error handling when something goes wrong on the server
 Work out why I can't use cucumber -r, and have to require 'belly' explicitly instead. annoying.
 Replace sinatra FakeHub with a rack app
 CLI tools for initing a project (like heroku)
-default config for host / port pointing to production so gem has it hard-coded

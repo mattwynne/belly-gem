@@ -14,6 +14,7 @@ module Belly
     def publish(scenario)
       feature_name = scenario.feature.name.split("\n").first # TODO: only needed for older cucumbers
       data = { 
+        :type => :cucumber_scenario_result,
         :id => { :feature => feature_name, :scenario => scenario.name }, 
         :status => scenario.status, 
         :project => config.project 
