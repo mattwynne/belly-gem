@@ -10,7 +10,7 @@ Trollop::options do
   banner <<-EOS
 === Commands
 
-  init            Create a new project for the current folder
+  rerun:cucumber  Show Cucumber scenarios that need to be re-run
   help <command>  Get some help on a particular command
 
 EOS
@@ -25,4 +25,4 @@ unless Belly::Cli::COMMANDS.include?(command)
   Trollop.die("Don't know that command, sorry")
 end
 
-require "belly/cli/#{command}"
+require "belly/cli/#{command.gsub(':','_')}"

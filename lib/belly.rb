@@ -33,10 +33,6 @@ module Belly
       @config ||= Config.new
     end
     
-    def user_credentials
-      @user_credentials ||= UserCredentials.new(config)
-    end
-    
     def hub
       @hub ||= Belly::Client.new(config)
     end

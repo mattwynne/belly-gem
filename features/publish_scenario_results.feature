@@ -39,7 +39,7 @@ Feature: Publish scenario results
     When I run cucumber -r belly -r features -v
     And the belly-hub should have received the following requests:
       | type | path       | data                                                           |
-      | POST | /scenarios | {"status":"passed","id":{"scenario":"Solid","feature":"Test"}} |
+      | POST | /scenarios | {"type":"cucumber_scenario_result","status":"passed","id":{"scenario":"Solid","feature":"Test"}} |
 
   Scenario: Run a test with a scenario that fails
   And a file named "features/foo.feature" with:
