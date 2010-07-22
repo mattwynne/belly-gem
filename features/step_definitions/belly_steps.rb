@@ -1,19 +1,25 @@
 require 'aruba'
 
-Given /^there is a belly\-hub running on localhost:12345$/ do
+module RequestsHelper
+  def requests
+    @hub.requests.map do |r|
+      result = r.dup
+      result["data"] = JSON.parse(r["data"])
+      result
+    end
+  end
+end
+
+World(RequestsHelper)
+
+Given /^there is a hub running on localhost:12345$/ do
   @hub = Belly::FakeHub.run(12345)
 end
 
-Then /^the belly\-hub should have received the following requests:$/ do |table|
-  requests = @hub.requests.map do |r|
-    result = r.dup
-    result["data"] = JSON.parse(r["data"])
-    result
-  end
-  
-  table.map_column!('data') do |raw_data|
-    JSON.parse(raw_data)
-  end
-  
-  table.diff! requests
+Then /^the hub should have received a POST to "([^"]*)" with:$/ do |path, data|
+  requests.any? do |request|
+    request["type"] == "POST" &&
+      request["path"] == path &&
+      request["data"] == JSON.parse(data)
+  end.should be_true
 end

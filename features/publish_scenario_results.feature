@@ -27,7 +27,7 @@ Feature: Publish scenario results
       project: test-project
       
       """
-    And there is a belly-hub running on localhost:12345
+    And there is a hub running on localhost:12345
 
   @announce
   Scenario: Run a test with a scenario that passes
@@ -39,9 +39,18 @@ Feature: Publish scenario results
     
       """
     When I run cucumber features
-    And the belly-hub should have received the following requests:
-      | type | path       | data                                                           |
-      | POST | /scenarios | {"project":"test-project","type":"cucumber_scenario_result","status":"passed","id":{"scenario":"Solid","feature":"Test"}} |
+    Then the hub should have received a POST to "/scenarios" with:
+      """
+      { 
+        "project":"test-project",
+        "type":"cucumber_scenario_result",
+        "status":"passed",
+        "id": {
+          "scenario":"Solid",
+          "feature":"Test"
+        }
+      }
+      """
 
   Scenario: Run a test with a scenario that fails
   And a file named "features/foo.feature" with:
@@ -55,7 +64,21 @@ Feature: Publish scenario results
     
     """
     When I run cucumber -r belly -r features -v
-    And the belly-hub should have received the following requests:
-      | type | path       | data                                                           |
-      | POST | /scenarios | {"project":"test-project","type":"cucumber_scenario_result","status":"passed","id":{"scenario":"Solid","feature":"Test"}} |
-      | POST | /scenarios | {"project":"test-project","type":"cucumber_scenario_result","status":"failed","id":{"scenario":"Shaky","feature":"Test"}} |
+    Then the hub should have received a POST to "/scenarios" with:
+      """
+      {
+        "project":"test-project",
+        "type":"cucumber_scenario_result",
+        "status":"passed",
+        "id": {"scenario":"Solid","feature":"Test"}
+      }
+      """
+    And the hub should have received a POST to "/scenarios" with:
+      """
+      {
+        "project":"test-project",
+        "type":"cucumber_scenario_result",
+        "status":"failed",
+        "id": {"scenario":"Shaky","feature":"Test"}
+      }
+      """
