@@ -1,0 +1,1 @@
+require 'belly/for/cucumber'

@@ -7,7 +7,7 @@ require 'json'
 module Belly
   class << self
     def log(message)
-      return unless ENV['BELLY_LOG']
+      return unless ENV['BELLY_DEBUG']
       puts "* [Belly] #{message}"
     end
   

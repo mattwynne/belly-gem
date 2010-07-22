@@ -7,7 +7,7 @@ Feature: Publish scenario results
     Given a standard Cucumber project directory structure
     And a file named "features/support/belly.rb" with:
       """
-      require 'belly' rescue puts("Could not load belly - do you need to install the gem?")
+      require 'belly/for/cucumber' rescue puts("Could not load belly - do you need to install the gem?")
       
       """
       
@@ -24,10 +24,12 @@ Feature: Publish scenario results
     And a file named ".belly" with:
       """
       hub: localhost:12345
+      project: test-project
       
       """
     And there is a belly-hub running on localhost:12345
 
+  @announce
   Scenario: Run a test with a scenario that passes
     Given a file named "features/foo.feature" with:
       """
@@ -36,10 +38,10 @@ Feature: Publish scenario results
           Given I am a rock
     
       """
-    When I run cucumber -r belly -r features -v
+    When I run cucumber features
     And the belly-hub should have received the following requests:
       | type | path       | data                                                           |
-      | POST | /scenarios | {"type":"cucumber_scenario_result","status":"passed","id":{"scenario":"Solid","feature":"Test"}} |
+      | POST | /scenarios | {"project":"test-project","type":"cucumber_scenario_result","status":"passed","id":{"scenario":"Solid","feature":"Test"}} |
 
   Scenario: Run a test with a scenario that fails
   And a file named "features/foo.feature" with:
@@ -55,5 +57,5 @@ Feature: Publish scenario results
     When I run cucumber -r belly -r features -v
     And the belly-hub should have received the following requests:
       | type | path       | data                                                           |
-      | POST | /scenarios | {"status":"passed","id":{"scenario":"Solid","feature":"Test"}} |
-      | POST | /scenarios | {"status":"failed","id":{"scenario":"Shaky","feature":"Test"}} |
+      | POST | /scenarios | {"project":"test-project","type":"cucumber_scenario_result","status":"passed","id":{"scenario":"Solid","feature":"Test"}} |
+      | POST | /scenarios | {"project":"test-project","type":"cucumber_scenario_result","status":"failed","id":{"scenario":"Shaky","feature":"Test"}} |
