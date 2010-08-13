@@ -1,13 +1,11 @@
+require 'belly/client/default_config'
 module Belly
   class Config
-    class NoConfig
-    end
-    
     attr_reader :host, :port
     
     class << self
       def new(*args)
-        return NoConfig.new unless File.exists?(path)
+        return DefaultConfig.new unless File.exists?(path)
         super
       end
       
@@ -17,6 +15,7 @@ module Belly
     end
     
     def initialize
+      @default = DefaultConfig.new
       @host, @port = config_file['hub'].split(':')
     end
     
@@ -25,7 +24,11 @@ module Belly
     end
     
     def project
-      config_file['project']
+      config_file['project'] || @default.project
+    end
+    
+    def user
+      config_file['user'] || @default.user
     end
     
     private

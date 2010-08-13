@@ -2,6 +2,7 @@ $:.push(File.expand_path(File.dirname(__FILE__)))
 
 require 'belly/client'
 require 'belly/client/config'
+require 'belly/messages/cucumber_scenario_result_message'
 require 'json'
 
 module Belly
@@ -14,12 +15,13 @@ module Belly
     def publish(scenario)
       return if offline?
       feature_name = scenario.feature.name.split("\n").first # TODO: only needed for older cucumbers
-      data = { 
-        :type => :cucumber_scenario_result,
-        :id => { :feature => feature_name, :scenario => scenario.name }, 
-        :status => scenario.status, 
-        :project => config.project 
-      }.to_json
+
+      data = Messages::CucumberScenarioResultMessage.new(
+        feature_name, 
+        scenario.name, 
+        scenario.status,
+        config.user,
+        config.project).to_json
       
       Belly.log("publishing #{data}")
 
@@ -42,10 +44,6 @@ module Belly
   
     def config
       @config ||= Config.new
-    end
-    
-    def user_credentials
-      @user_credentials ||= UserCredentials.new(config)
     end
     
     def hub
