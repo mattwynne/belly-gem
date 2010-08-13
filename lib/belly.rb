@@ -33,7 +33,7 @@ module Belly
         rescue SocketError => exception
           # TODO: test this
           unless offline?
-            warn("Belly couldn't save your results. Maybe you're offline?")
+            warn("Belly couldn't send your results to the server. I suppose you're offline are you?")
             offline!
           end
         end
