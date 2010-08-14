@@ -1,5 +1,5 @@
 module Belly
   module Cli
-    COMMANDS = %w(rerun:cucumber)
+    COMMANDS = %w(init rerun:cucumber)
   end
 end

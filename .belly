@@ -1,2 +1,2 @@
-hub: belly.heroku.com
+hub: localhost:3000
 project: belly-gem

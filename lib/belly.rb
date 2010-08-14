@@ -15,13 +15,16 @@ module Belly
     def publish(scenario)
       return if offline?
       feature_name = scenario.feature.name.split("\n").first # TODO: only needed for older cucumbers
+      feature_file, line = scenario.file_colon_line.split(':')
 
       data = Messages::CucumberScenarioResultMessage.new(
         feature_name, 
         scenario.name, 
         scenario.status,
         config.user,
-        config.project).to_json
+        config.project,
+        feature_file,
+        line).to_json
       
       Belly.log("publishing #{data}")
 
