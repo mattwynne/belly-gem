@@ -16,6 +16,20 @@ if File.exists?('features/support')
   end
   File.open(target, 'w') do |f|
     f.puts "require 'belly/for/cucumber'"
-    puts "Created #{target}"
   end
+  puts "Created #{target}"
+  puts <<-EOF
+
+Your project is now initialized for working with Belly.
+
+You can configure Belly's settings by creating a .belly file in root of your project.
+If you don't create one, I'll just use some defaults.
+
+Here's an example:
+
+project: #{Belly.config.project}
+user:
+  name: #{Belly.config.user[:name]}
+  email: #{Belly.config.user[:email]}
+EOF
 end
