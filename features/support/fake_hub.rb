@@ -18,10 +18,6 @@ module Belly
             @requests ||= []
           end
           
-          def add(data)
-            all << data
-          end
-          
           def clear!
             @requests = []
           end
@@ -34,16 +30,11 @@ module Belly
       end
       
       post '*' do
-        # For some reason env["PATH_INFO"] is blank, so we do this instead
-        host = request.env["HTTP_HOST"]
-        uri = request.env["REQUEST_URI"]
-        path = uri.match(/#{host}(.*)/).captures[0]
-        
-        Requests.add({ 
-          'type' => request.env['REQUEST_METHOD'], 
-          'path' => path,
-          'data' => request.body.read }
-        )
+        Requests.all << { 
+          'type' => env['REQUEST_METHOD'], 
+          'path' => env["PATH_INFO"],
+          'data' => request.body.read 
+        }
         ''
       end
     end
