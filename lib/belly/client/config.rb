@@ -1,5 +1,6 @@
 require 'belly/client/default_config'
-module Belly
+
+module Belly::Client
   class Config
     attr_reader :host, :port
     

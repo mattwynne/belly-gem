@@ -34,9 +34,14 @@ module Belly
       end
       
       post '*' do
+        # For some reason env["PATH_INFO"] is blank, so we do this instead
+        host = request.env["HTTP_HOST"]
+        uri = request.env["REQUEST_URI"]
+        path = uri.match(/#{host}(.*)/).captures[0]
+        
         Requests.add({ 
           'type' => request.env['REQUEST_METHOD'], 
-          'path' => '/scenarios', 
+          'path' => path,
           'data' => request.body.read }
         )
         ''

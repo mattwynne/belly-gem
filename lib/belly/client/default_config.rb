@@ -1,4 +1,4 @@
-module Belly
+module Belly::Client
   class DefaultConfig
     def project
       File.basename(Dir.pwd)
