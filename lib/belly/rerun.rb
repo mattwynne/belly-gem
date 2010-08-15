@@ -1,5 +1,5 @@
 module Belly
-  class CucumberRerun
+  class Rerun
     def initialize(options)
     
     end

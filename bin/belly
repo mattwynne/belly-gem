@@ -11,7 +11,7 @@ Trollop::options do
 === Commands
 
   init            Initialize this project for use with Belly
-  rerun:cucumber  Show Cucumber scenarios that need to be re-run
+  rerun           Show tests that need to be re-run
   help <command>  Get some help on a particular command
 
 EOS
