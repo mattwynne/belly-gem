@@ -33,7 +33,7 @@ Feature: Rerun
       """
     When I run "cucumber features"
     And I run "belly rerun:cucumber"
-    Then I should see:
+    Then it should pass with:
       """
       features/foo.feature:
       
