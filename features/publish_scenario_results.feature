@@ -7,17 +7,17 @@ Feature: Publish scenario results
     Given a standard Cucumber project directory structure
     And a file named "features/support/belly.rb" with:
       """
-      require 'belly/for/cucumber' rescue puts("Could not load belly - do you need to install the gem?")
+      require 'belly/for/cucumber'
       
       """
       
     And a file named "features/step_definitions/foo_steps.rb" with:
       """
-      Given /^I am a rock$/ do
+      When /pass/ do
       end
 
-      Given /^I am thin ice$/ do
-        raise("yikes")
+      When /fail/ do
+        raise("FAIL")
       end
       
       """
@@ -33,52 +33,49 @@ Feature: Publish scenario results
   Scenario: Run a test with a scenario that passes
     Given a file named "features/foo.feature" with:
       """
-      Feature: Test
-        Scenario: Solid
-          Given I am a rock
+      Feature: Passing Feature
+        Scenario: Passing Scenario
+          When I pass
     
       """
     When I run cucumber features
-    Then the hub should have received a POST to "/scenarios" with:
+    Then the hub should have received a POST to "/test_results" with:
       """
-      { 
-        "project":"test-project",
-        "type":"cucumber_scenario_result",
-        "status":"passed",
+      {
         "id": {
-          "scenario":"Solid",
-          "feature":"Test"
-        }
+          "feature":"Passing Feature",
+          "line":"2",
+          "feature_file":"features/foo.feature",
+          "scenario":"Passing Scenario"
+        },
+        "project":"test-project",
+        "type":"Belly::Messages::CucumberScenarioResultMessage"
       }
       """
 
   Scenario: Run a test with a scenario that fails
   And a file named "features/foo.feature" with:
     """
-    Feature: Test
-      Scenario: Solid
-        Given I am a rock
+    Feature: Passing Feature
+      Scenario: Passing Scenario
+        When I pass
     
-      Scenario: Shaky
-        Given I am thin ice
+      Scenario: Failing Scenario
+        When I fail
     
     """
     When I run cucumber -r belly -r features -v
-    Then the hub should have received a POST to "/scenarios" with:
+    Then the hub should have received a POST to "/test_results" with:
       """
       {
         "project":"test-project",
-        "type":"cucumber_scenario_result",
-        "status":"passed",
-        "id": {"scenario":"Solid","feature":"Test"}
+        "status":"passed"
       }
       """
-    And the hub should have received a POST to "/scenarios" with:
+    And the hub should have received a POST to "/test_results" with:
       """
       {
         "project":"test-project",
-        "type":"cucumber_scenario_result",
-        "status":"failed",
-        "id": {"scenario":"Shaky","feature":"Test"}
+        "status":"failed"
       }
       """

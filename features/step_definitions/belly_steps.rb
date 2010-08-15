@@ -31,12 +31,27 @@ project: test-project
 EOF
 end
 
-Then /^the hub should have received a POST to "([^"]*)" with:$/ do |path, data|
-  requests.any? do |request|
-    request["type"] == "POST" &&
-      request["path"] == path &&
-      request["data"] == JSON.parse(data)
-  end.should be_true
+Then /^the hub should have received a POST to "([^"]*)" with:$/ do |path, expected_json|
+  expected_data = JSON.parse(expected_json)
+  match = false
+  candidates = requests.select do |request|
+    request["type"] == "POST" && request["path"] == path
+  end
+  
+  unless candidates.any?
+    raise("Couldn't find any POST requests to #{path} in: \n\n #{requests.inspect}")
+  end
+  
+  candidates.each do |request|
+    match = expected_data.keys.all? do |key|
+      request["data"][key] == expected_data[key]
+    end
+    break if match
+  end
+
+  unless match
+    raise("Couldn't find any suitable requests in:\n\n #{candidates.inspect}")
+  end
 end
 
 Then /^the hub should have received a test result$/ do
