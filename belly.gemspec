@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{belly}
-  s.version = "0.2.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matt Wynne"]
-  s.date = %q{2010-08-13}
+  s.date = %q{2010-08-15}
   s.default_executable = %q{belly}
   s.description = %q{Client app for the incredible new belly web service, coming soon.}
   s.email = %q{matt@mattwynne.net}
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "belly.gemspec",
      "bin/belly",
+     "features/fakeweb.feature",
      "features/publish_scenario_results.feature",
      "features/step_definitions/belly_steps.rb",
      "features/step_definitions/cucumber_steps.rb",
@@ -38,11 +39,16 @@ Gem::Specification.new do |s|
      "features/support/fake_hub.rb",
      "lib/belly.rb",
      "lib/belly/cli.rb",
+     "lib/belly/cli/init.rb",
      "lib/belly/cli/rerun_cucumber.rb",
      "lib/belly/client.rb",
      "lib/belly/client/config.rb",
+     "lib/belly/client/default_config.rb",
+     "lib/belly/client/fakeweb_hack.rb",
+     "lib/belly/client/hub_proxy.rb",
      "lib/belly/cucumber_rerun.rb",
      "lib/belly/for/cucumber.rb",
+     "lib/belly/messages/cucumber_scenario_result_message.rb",
      "spec/belly/project_initializer_spec.rb",
      "spec/spec_helper.rb"
   ]
