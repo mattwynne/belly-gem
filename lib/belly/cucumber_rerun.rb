@@ -5,7 +5,10 @@ module Belly
     end
   
     def run(ui)
-      ui.die("I lied. I have no idea how to do this yet, sorry")
+      Belly.hub.get_failing_scenarios_for_project_named(Belly.config.project).each do |scenario|
+        p scenario
+        # puts "#{scenario["file_name"]}:#{scenario["line"]}"
+      end
     end
   end
 end
