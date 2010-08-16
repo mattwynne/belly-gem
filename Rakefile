@@ -8,7 +8,7 @@ begin
     gem.summary = %Q{Client app for the incredible new belly web service, coming soon.}
     gem.description = %Q{Client app for the incredible new belly web service, coming soon.}
     gem.email = "matt@mattwynne.net"
-    gem.homepage = "http://github.com/mattwynne/belly-mouth"
+    gem.homepage = "http://belly.heroku.com"
     gem.authors = ["Matt Wynne"]
     gem.add_development_dependency "rspec"
     gem.add_development_dependency "cucumber"
