@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{belly}
-  s.version = "0.3.2"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matt Wynne"]
@@ -40,17 +40,19 @@ Gem::Specification.new do |s|
      "lib/belly.rb",
      "lib/belly/cli.rb",
      "lib/belly/cli/init.rb",
+     "lib/belly/cli/rerun_cucumber.rb",
      "lib/belly/client.rb",
      "lib/belly/client/config.rb",
      "lib/belly/client/default_config.rb",
      "lib/belly/client/fakeweb_hack.rb",
      "lib/belly/client/hub_proxy.rb",
+     "lib/belly/cucumber_rerun.rb",
      "lib/belly/for/cucumber.rb",
      "lib/belly/messages/cucumber_scenario_result_message.rb",
      "spec/belly/project_initializer_spec.rb",
      "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/mattwynne/belly-mouth}
+  s.homepage = %q{http://belly.heroku.com}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
