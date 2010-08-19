@@ -1,4 +1,5 @@
 require 'belly/client/default_config'
+require 'yaml'
 
 module Belly::Client
   class Config
