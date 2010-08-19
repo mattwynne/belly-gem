@@ -40,15 +40,15 @@ Gem::Specification.new do |s|
      "lib/belly.rb",
      "lib/belly/cli.rb",
      "lib/belly/cli/init.rb",
-     "lib/belly/cli/rerun_cucumber.rb",
+     "lib/belly/cli/rerun.rb",
      "lib/belly/client.rb",
      "lib/belly/client/config.rb",
      "lib/belly/client/default_config.rb",
      "lib/belly/client/fakeweb_hack.rb",
      "lib/belly/client/hub_proxy.rb",
-     "lib/belly/cucumber_rerun.rb",
      "lib/belly/for/cucumber.rb",
      "lib/belly/messages/cucumber_scenario_result_message.rb",
+     "lib/belly/rerun.rb",
      "spec/belly/project_initializer_spec.rb",
      "spec/spec_helper.rb"
   ]
