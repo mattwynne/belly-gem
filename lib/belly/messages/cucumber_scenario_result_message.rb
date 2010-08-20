@@ -11,7 +11,7 @@ module Belly
             :line => line
           },
           :exception => {
-            :message => scenario.exception
+            :message => scenario.exception.to_s
           },
           :status => scenario.status,
           :user => user,
