@@ -76,6 +76,9 @@ Feature: Publish scenario results
       """
       {
         "project":"test-project",
-        "status":"failed"
+        "status":"failed",
+        "exception":{
+          "message":"FAIL"
+        }
       }
       """

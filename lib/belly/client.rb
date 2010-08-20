@@ -8,8 +8,7 @@ module Belly
 
       data = Messages::CucumberScenarioResultMessage.new(
         feature_name, 
-        scenario.name, 
-        scenario.status,
+        scenario,
         config.user,
         config.project,
         feature_file,
