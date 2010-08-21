@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{belly}
-  s.version = "0.3.5"
+  s.version = "0.4.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matt Wynne"]
-  s.date = %q{2010-08-19}
+  s.date = %q{2010-08-21}
   s.default_executable = %q{belly}
   s.description = %q{Client app for the incredible new belly web service, coming soon.}
   s.email = %q{matt@mattwynne.net}
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
     ".belly",
      ".document",
      ".gitignore",
+     "Gemfile",
      "LICENSE",
      "README.rdoc",
      "Rakefile",
@@ -37,6 +38,8 @@ Gem::Specification.new do |s|
      "features/support/belly.rb",
      "features/support/env.rb",
      "features/support/fake_hub.rb",
+     "features/todo.feature",
+     "features/why.feature",
      "lib/belly.rb",
      "lib/belly/cli.rb",
      "lib/belly/cli/init.rb",
@@ -55,7 +58,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://belly.heroku.com}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{Client app for the incredible new belly web service, coming soon.}
   s.test_files = [
     "spec/belly/project_initializer_spec.rb",
@@ -66,7 +69,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<cucumber>, [">= 0"])
     else
