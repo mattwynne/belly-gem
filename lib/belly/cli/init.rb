@@ -1,6 +1,6 @@
 options = Trollop::options do
   banner <<-EOF
-This is the help for the init command. To see all commands availlable, type belly --help
+This is the help for the init command. To see all commands available, type belly --help
 
 Usage: belly init
 

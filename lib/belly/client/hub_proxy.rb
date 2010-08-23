@@ -1,7 +1,9 @@
 require 'rest_client'
 
 module Belly::Client
+  class NoSuchProjectError < StandardError; end
   class HubProxy
+    
     def initialize(config)
       @config = config
     end
@@ -21,7 +23,7 @@ module Belly::Client
     def get_project_id_by_name(project_name)
       response = request(:get, "/projects.json?name=#{project_name}")
       projects = JSON.parse(response)["projects"]
-      raise("Couldn't find a project named #{project_name}") unless projects.any?
+      raise NoSuchProjectError unless projects.any?
       projects.first["id"].to_i
     end
     
