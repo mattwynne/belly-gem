@@ -1,2 +1,5 @@
 hub: belly.heroku.com:80
 project: belly-gem
+user:
+  name: Matt Wynne
+  email: matt@mattwynne.net

@@ -14,5 +14,3 @@ module Belly
 end
 
 Belly.log "Belly version #{Belly.version} starting in #{File.expand_path(File.dirname(__FILE__))}"
-
-require 'belly/client'

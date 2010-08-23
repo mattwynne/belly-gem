@@ -7,29 +7,60 @@ Usage: belly init
 Initialize your project for use with the belly service
 
 EOF
+  opt :force, 'Overwite files even if they already exist', :default => false
 end
 
-if File.exists?('features/support')
-  target = 'features/support/belly.rb'
-  if File.exists?(target)
-    Trollop.die("There's already a #{target} which I was going to create. Not much for me to do")
-  end
-  File.open(target, 'w') do |f|
-    f.puts "require 'belly/for/cucumber'"
-  end
-  puts "Created #{target}"
-  puts <<-EOF
+require 'belly/client/default_config'
+module Belly
+  class Init
+    
+    def initialize(options)
+      @options = options
+    end
+    
+    def run(ui)
+      unless File.exists?('features/support')
+        ui.die("It doesn't look like you are in a project with Cucumber features")
+      end
 
-Your project is now initialized for working with Belly.
-
-You can configure Belly's settings by creating a .belly file in root of your project.
-If you don't create one, I'll just use some defaults.
-
-Here's an example:
-
-project: #{Belly.config.project}
-user:
-  name: #{Belly.config.user[:name]}
-  email: #{Belly.config.user[:email]}
+      create_file('features/support/belly.rb') do
+        <<-EOF
+require 'belly/for/cucumber'
 EOF
+      end
+      
+      create_file('.belly') do
+        <<-EOF
+hub: #{default_config.host}:#{default_config.port}
+project: #{default_config.project}
+user:
+  name: #{default_config.user[:name]}
+  email: #{default_config.user[:email]}
+EOF
+      end
+    
+      puts
+      puts "Lovely. Your project is now initialized for use with Belly."
+      puts "You can edit your project's settings by editing the .belly file in this folder."
+    end
+  
+    private
+    
+    def default_config
+      @default_config ||= Belly::Client::DefaultConfig.new
+    end
+  
+    def create_file(target)
+      FileUtils.rm_rf(target) if @options[:force]
+      if File.exists?(target)
+        Trollop.die("#{target} already exists. Use --force to make me overwrite it")
+      end
+      File.open(target, 'w') do |f|
+        f.puts yield
+      end
+      puts "Created #{target}"
+    end
+  end
 end
+
+Belly::Init.new(options).run(Trollop)
