@@ -10,6 +10,8 @@ begin
     gem.email = "matt@mattwynne.net"
     gem.homepage = "http://belly.heroku.com"
     gem.authors = ["Matt Wynne"]
+    gem.add_dependency "trollop"
+    gem.add_dependency "rest-client"
     gem.add_development_dependency "rspec"
     gem.add_development_dependency "cucumber"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
