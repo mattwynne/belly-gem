@@ -11,6 +11,8 @@ EOF
 end
 
 require 'belly/client/default_config'
+require 'fileutils'
+
 module Belly
   class Init
     
