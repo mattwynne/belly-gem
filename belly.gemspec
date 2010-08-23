@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{belly}
-  s.version = "0.5.0"
+  s.version = "0.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matt Wynne"]
-  s.date = %q{2010-08-22}
+  s.date = %q{2010-08-23}
   s.default_executable = %q{belly}
   s.description = %q{Client app for the incredible new belly web service, coming soon.}
   s.email = %q{matt@mattwynne.net}
@@ -51,7 +51,6 @@ Gem::Specification.new do |s|
      "lib/belly/client/hub_proxy.rb",
      "lib/belly/for/cucumber.rb",
      "lib/belly/messages/cucumber_scenario_result_message.rb",
-     "lib/belly/rerun.rb",
      "spec/belly/project_initializer_spec.rb",
      "spec/spec_helper.rb"
   ]
