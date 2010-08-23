@@ -12,7 +12,9 @@ module Belly::Client
     
     def get_failing_scenarios_for_project_named(project_name)
       project_id = get_project_id_by_name(project_name)
-      response = request(:get, "/projects/#{project_id}/cucumber_scenarios.json?status=todo")
+      rerun_statuses = [:pending, :undefined, :failed]
+      status_querystring = rerun_statuses.map { |s| "status[]=#{s}"}.join("&")
+      response = request(:get, "/projects/#{project_id}/cucumber_scenarios.json?#{status_querystring}")
       JSON.parse(response)["cucumber_scenarios"]
     end
     
